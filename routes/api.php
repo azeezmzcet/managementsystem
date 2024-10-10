@@ -24,4 +24,4 @@ Route::get('/studentlist', [StudentController::class, 'index']);
 
 
 Route::post('/teacher-login',[AuthController::class, 'teacherLogin']);
-Route::post('/create-teacher',[AuthController::class, 'createTeacher']);
+Route::post('/teacher-register',[AuthController::class, 'createTeacher']);

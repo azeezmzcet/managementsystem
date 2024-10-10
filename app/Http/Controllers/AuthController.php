@@ -181,7 +181,7 @@ public function createTeacher(Request $request)
     $validator = Validator::make($request->all(), [
         'username' => 'required|string|unique:users',
         'password' => 'required|string|min:6',
-        'course' => 'nullable|string',  // Only for teachers
+        'course' => 'required|string',  // Only for teachers
     ]);
 
     // Check if validation fails
@@ -190,11 +190,16 @@ public function createTeacher(Request $request)
     }
 
     // Create user data
-    $data = $request->only('username', 'course'); // Include course if needed
+    $data = $request->only('username','password','course');            // Include course if needed
+    $data['role'] = 'teacher';
     $data['password'] = Hash::make($request->password); // Hash password
 
     // Create the teacher
     $teacher = User::create($data);
+
+    $tokenResult = $teacher->createToken('authToken');  // Adjusted token name
+        $res = $tokenResult->plainTextToken;
+    
 
     return response()->json([
         'message' => 'Teacher created successfully.',
