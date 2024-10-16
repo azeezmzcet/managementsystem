@@ -14,7 +14,7 @@ class StudentListSeeder extends Seeder
      */
     public function run(): void
     {
-        $courses = ['BBA', 'B.Sc', 'B.Com', 'B.Tech'];
+        $courses = ['BBA', 'B.Sc', 'B.Com', 'B.Tech', 'MBA'];
         $faker = Faker::create();
 
         foreach ($courses as $course) {
@@ -27,6 +27,5 @@ class StudentListSeeder extends Seeder
                 ]);
             }
         }
-    
     }
 }

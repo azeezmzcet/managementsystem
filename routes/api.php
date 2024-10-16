@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CourseController;
+
 
 
 Route::get('/user', function (Request $request) {
@@ -20,8 +22,25 @@ Route::get('/login', [AuthController::class, 'login']);
 
 
 
-Route::get('/studentlist', [StudentController::class, 'index']);
+Route::get('/studentlist', [StudentController::class, 'studentList']);
+// Define the resource routes for the StudentController
+Route::apiResource('/students', StudentController::class);
+
 
 
 Route::post('/teacher-login',[AuthController::class, 'teacherLogin']);
 Route::post('/teacher-register',[AuthController::class, 'createTeacher']);
+
+//
+Route::get('/teacher', [AuthController::class, 'getTeachers']);
+//
+
+
+Route::apiResource('/courses', CourseController::class);
+
+
+
+
+
+//Route::middleware('auth:sanctum')->get('/studentlist', [AuthController::class, 'getStudentsByCourse']);
+Route::post('/courses/{course}/assign', [CourseController::class, 'assignTeacherToCourse']); // Example: Assign teacher to a course
