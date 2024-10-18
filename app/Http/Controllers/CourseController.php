@@ -5,7 +5,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Studentlists;
 use Illuminate\Http\Request;
+
+use Faker\Factory as Faker;
 
 class CourseController extends Controller
 {
@@ -66,5 +69,24 @@ class CourseController extends Controller
             'message' => 'Teacher assigned to course successfully.',
             'course' => $course,
         ]);
+    }
+
+
+
+
+
+
+
+
+    private function generateRandomStudents($courseName, $number)
+    {
+        $faker = Faker::create();
+
+        for ($i = 0; $i < $number; $i++) {
+            Studentlists::create([
+                'name' => $faker->name,
+                'course' => $courseName, // Ensure the course name matches the newly created course
+            ]);
+        }
     }
 }

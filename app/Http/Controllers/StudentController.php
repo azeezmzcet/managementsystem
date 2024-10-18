@@ -121,7 +121,7 @@ class StudentController extends Controller
         if ($user->role !== 'teacher') {
             return response()->json(['message' => 'Access denied. Only teachers can view student lists.'], 403);
         }
-    
+       // $user = $request->query('course');
         // Fetch students based on the teacher's assigned course
         $students = Studentlists::where('course', $user->course)->get();
     
