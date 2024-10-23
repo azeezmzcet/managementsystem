@@ -22,15 +22,7 @@ class UsersTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        // Optional: Insert a teacher record for testing
-        // DB::table('users')->insert([
-        //     'username' => 'teacher1',
-        //     'password' => bcrypt('teacherPassword123'), // You can set a specific password for testing
-        //     'role' => 'teacher',
-        //     'course' => 'Mathematics',
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+      
 
         // Output the random password for reference
         echo "Principal password: " . $principalPassword . "\n";

@@ -140,23 +140,6 @@ class StudentController extends Controller
 
 
 
-//     // Inside StudentController.php
-// public function getStudentsByCourse(Request $request)
-// {
-//     $user = Auth::user();
-    
-//     if ($user->role !== 'teacher') {
-//         return response()->json(['message' => 'Access denied. Only teachers can view student lists.'], 403);
-//     }
-
-//     $students = Studentlists::where('course', $user->course)->get();
-
-//     if ($students->isEmpty()) {
-//         return response()->json(['message' => 'No students found for your course.'], 404);
-//     }
-
-//     return response()->json($students, 200);
-// }
 
 
     

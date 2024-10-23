@@ -50,7 +50,7 @@ class AuthController extends Controller
         ], 201);
     }
     
-///////////////
+///////////////login
 
  public function login(Request $request)
      {
@@ -63,19 +63,13 @@ class AuthController extends Controller
     $user = User::where('username', $credentials['username'])->first();
 
     
-    // if ($user) {
-    //     logger('User found:', $user->toArray());
-    // } else {
-    //     logger('User not found with username:', $credentials['username']);
-    // }
+   
     if (!$user) {
         logger('User not found with username:', $credentials['username']);
         return response()->json(['message' => 'Invalid credentials.'], 401);
     }
 
-    // if ($user->role !== 'principal') {
-    //     return response()->json(['message' => 'Access denied. Only principals can log in.'], 403);
-    // }
+    
     
     if (!$user || !Hash::check($credentials['password'], $user->password)) {
         return response()->json(['message' => 'Invalid credentials.'], 401);
@@ -120,60 +114,6 @@ class AuthController extends Controller
         // 'user' => $user,
     ], 200);
     }
-
-  //old login
-    /////////////////
-    //newlogin
-//     public function login(Request $request)
-// {
-//     $credentials = $request->only('username', 'password');
-
-//     // Attempt to find the user
-//     $user = User::where('username', $credentials['username'])->first();
-
-//     // Check if user exists and password is valid
-//     if (!$user || !Hash::check($credentials['password'], $user->password)) {
-//         return response()->json(['message' => 'Invalid credentials.'], 401);
-//     }
-
-//     // Generate authentication token
-//     $tokenResult = $user->createToken('authToken');
-//     $token = $tokenResult->plainTextToken;
-
-//     if ($user->role === 'teacher') {
-//         return response()->json([
-//             'tokenName' => $token,
-//             'tokenType' => 'Bearer',
-//             'role' => 'teacher',
-//             'course' => $user->course, // Return the teacher's course in the response
-//             'message' => 'Teacher login successful.',
-//         ], 200);
-//     }
-
-//     return response()->json(['message' => 'Unauthorized.'], 403);
-// }
-
-
-
-// public function login(Request $request)
-// {
-//     $credentials = $request->only('username', 'password');
-
-//     if (!Auth::attempt($credentials)) {
-//         return response()->json(['message' => 'Invalid credentials'], 401);
-//     }
-
-//     $user = Auth::user();
-//     $tokenResult = $user->createToken('authToken');
-//     $token = $tokenResult->plainTextToken;
-
-//     return response()->json([
-//         'tokenName' => $token,
-//         'role' => $user->role, // Include user role in the response
-//         'message' => 'Login successful',
-//     ]);
-// }
-
 
 
 
@@ -233,9 +173,7 @@ public function createTeacher(Request $request)
     // Create the teacher
     $teacher = User::create($data);
 
-    // $tokenResult = $teacher->createToken('authToken');  // Adjusted token name
-    //     $res = $tokenResult->plainTextToken;
-    
+   
 
     return response()->json([
         'message' => 'Teacher created successfully.',
@@ -244,35 +182,6 @@ public function createTeacher(Request $request)
 
 
      }
-
-
-
-
-
-
-    //  public function getStudentsByCourse(Request $request)
-    // {
-    //     // Get the authenticated user
-    //     $user = Auth::user();
-    
-    //     // Ensure that only teachers can access this function
-    //     if ($user->role !== 'teacher') {
-    //         return response()->json(['message' => 'Access denied. Only teachers can view student lists.'], 403);
-    //     }
-    
-    //     // Fetch students based on the teacher's assigned course
-    //     $students = Studentlists::where('course', $user->course)->get();
-    
-    //     // If no students found, return a message
-    //     if ($students->isEmpty()) {
-    //         return response()->json(['message' => 'No students found for your course.'], 404);
-    //     }
-    
-    //     return response()->json($students, 200);
-    // }
-
-
-
 
     public function getTeachers()
     {
