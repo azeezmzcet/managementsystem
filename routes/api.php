@@ -33,6 +33,8 @@ Route::post('/teacher-register',[AuthController::class, 'createTeacher']);
 
 //
 Route::get('/teacher', [AuthController::class, 'getTeachers']);
+Route::delete('/teachers/{id}', [AuthController::class, 'destroy']);
+
 //
 
 

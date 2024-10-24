@@ -191,6 +191,21 @@ public function createTeacher(Request $request)
             'teachers' => $teachers
         ], 200);
     }
+
+
+
+
+    //destroy
+    public function destroy($id) {
+        $teacher = User::find($id);
+        if ($teacher) {
+            $teacher->delete();
+            return response()->json(['message' => 'Teacher deleted successfully']);
+        } else {
+            return response()->json(['error' => 'Teacher not found'], 404);
+        }
+    }
+    
     
 
 
